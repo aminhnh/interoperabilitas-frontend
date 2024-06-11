@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\KantongDarahController;
+use App\Http\Controllers\ViewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +15,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect()->route('kantongdarah.index');
+    return view('welcome');
 });
 
-Route::resource('kantongdarah', KantongDarahController::class);
+Route::get('login',function () {
+    return view('login');
+});
+
+Route::get('dashboard',function () {
+    return view('dashboard');
+});
+
+Route::get('/home', [ViewController::class, 'index']);
