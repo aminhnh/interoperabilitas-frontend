@@ -26,4 +26,7 @@ Route::get('dashboard',function () {
     return view('dashboard');
 });
 
+
+Route::get('dashboard/lembaga', [ViewController::class, 'showLembaga'])->name('dashboard.lembaga');
+
 Route::get('/home', [ViewController::class, 'index']);
