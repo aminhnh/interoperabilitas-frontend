@@ -8,13 +8,22 @@
     @elseif(session('error'))
         <div class="alert alert-danger">{{ session('error') }}</div>
     @endif
+
+    <style>
+        /* Adding CSS style to make table header red */
+        .red-header th {
+            background-color: red;
+            color: white; /* Adding white text color for better readability */
+        }
+    </style>
+
     <table class="table table-striped">
-        <thead>
+        <thead class="red-header">
             <tr>
                 <th>No</th>
                 <th>Golongan Darah</th>
                 <th>Jumlah</th>
-                <th>Lokasi</th>
+                <th>Lembaga</th>
                 <th>Actions</th>
             </tr>
         </thead>

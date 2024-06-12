@@ -49,7 +49,7 @@
     <div class="list-group"  id="sidebar" style="width: 200px; height: 100vh; background-color: #8B0000; position: fixed; padding-top: 5rem;">
         <ul>
             <li><a class="text-white" href="/dashboard">Dashboard</a></li>
-            <li><a class="text-white" href="{{ route('kantongdarah.index') }}">Persediaan Darah</a></li>
+            <li><a class="text-white" href="/kantongdarah">Kantong Darah</a></li>
             <li><a class="text-white" href="/lembaga">Lembaga</a></li>
             <li><a class="text-white" href="/kecamatan">Wilayah</a></li>
             <li><a class="text-white" href="/settings">Settings</a></li>
