@@ -24,7 +24,10 @@ Route::get('login',function () {
 });
 
 Route::get('dashboard',function () {
-    return view('dashboard');
+    return view('layouts.dashboard');
+});
+Route::get('lembaga',function () {
+    return view('lembaga.lembaga');
 });
 
 Route::get('/home', [ViewController::class, 'index']);
