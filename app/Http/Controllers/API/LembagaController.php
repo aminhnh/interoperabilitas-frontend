@@ -17,11 +17,18 @@ class LembagaController extends Controller
         $query = request()->query();
 
         $listLembaga = Lembaga::filterByQuery($query)->get()->load('role', 'kelurahan');
-        return response()->json([
-            'status' => '200 OK',
-            'message' => 'Berhasil menampilkan data lembaga.',
-            'data' => LembagaResource::collection($listLembaga),
-        ], 200);
+        if (request()->wantsJson()) {
+            return response()->json([
+                'status' => '200 OK',
+                'message' => 'Berhasil mengambil data darah.',
+                'data' => LembagaResource::collection($listLembaga),
+            ], 200);
+        } else {
+            // Return the HTML view for web requests
+            return view('lembaga.lembaga', ['lembagas' => $listLembaga]);
+        }
+
+
     }
 
     public function store(LembagaStoreRequest $request)

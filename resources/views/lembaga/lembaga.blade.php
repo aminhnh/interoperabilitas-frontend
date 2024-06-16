@@ -1,3 +1,7 @@
+@php
+    use Illuminate\Support\Str;
+@endphp
+
 @extends('layouts.layout')
 
 @section('title')
@@ -5,11 +9,7 @@ Lembaga
 @endsection
 
 @section('content')
-    <div class="container" style="padding-top: 5rem;">
-        <div class="jejak d-flex flex-row">
-            <img width="20rem" src="{{ asset('assets/ic_baseline-home.svg') }}">    
-            <a class="p-2 text-muted" href="/dashboard">Dashboard/List Lembaga</a>
-        </div>
+    <div class="container" style="padding-top: 5rem;">  
         
         <div class="container">
             <div class="row ">
@@ -50,35 +50,24 @@ Lembaga
                 <tr>
                 <th scope="col">No</th>
                 <th scope="col">Nama</th>
+                <th scope="col">Jenis</th>
                 <th scope="col">Alamat</th>
+                <th scope="col">Kode Pos</th>
                 <th scope="col">No Telp</th>
                 </tr>
             </thead>
             <tbody>
+                @foreach ($lembagas as $lembaga)
                 <tr>
-                <th scope="row">1</th>
-                <td>Considine and Sons</td>
-                <td>989 Hank Knoll Port Jayneton, ND 81834</td>
-                <td>+1-386-691-9124</td>
+                    <th scope="row">{{ $loop->iteration }}</th>
+                    <td>{{ $lembaga->nama }}</td>
+                    <td>{{str_replace('_', ' ', Str::ucfirst($lembaga->jenis))}}</td>
+                    <td>{{ $lembaga->alamat }}</td>
+                    <td>{{$lembaga-> kode_pos}}</td>
+                    <td>{{ $lembaga->no_telepon }}</td>
                 </tr>
-                <tr>
-                <th scope="row">2</th>
-                <td>Thompson, Stehr and Goodwin</td>
-                <td>2623 Esperanza Loaf Apt. 708 Abbottfurt, IL 41395-5096</td>
-                <td>+1-859-970-8427</td>
-                </tr>
-                <tr>
-                <th scope="row">3</th>
-                <td>Hirthe Ltd</td>
-                <td>23151 Quigley Camp Lake Marianoville, RI 25886</td>
-                <td>+1 (534) 610-6500</td>
-                </tr>
-                <tr>
-                <th scope="row">4</th>
-                <td>Armstrong-Hill</td>
-                <td>74009 Haley Prairie Maggiobury, TX 91278</td>
-                <td>+1-270-880-3562</td>
-                </tr>
+                @endforeach
+
             </tbody>
             </table>
             </div>
