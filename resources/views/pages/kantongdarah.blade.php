@@ -26,9 +26,9 @@ Kantong Darah
         <div class="row mt-4">
             <div class="col-12 card d-flex flex-col p-3">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Ex: Golongan Darah, Nama Lembaga" aria-label="Ex: Golongan Darah, Nama Lembaga" aria-describedby="basic-addon2">
+                    <input type="text" class="form-control" placeholder="Ex: Golongan Darah (A, B, AB, O)" aria-label="Ex: Golongan Darah (A, B, AB, O)" aria-describedby="basic-addon2">
                     <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button">Search</button>
+                        <button class="btn btn-outline-secondary" type="button" id="searchButton">Cari</button>
                     </div>
                 </div>
 
@@ -46,7 +46,7 @@ Kantong Darah
                         @forelse ($kantongdarah as $darah)
                         <tr>
                             <th scope="row">{{ $loop->iteration }}</th>
-                            <td>{{ $darah->golongan_darah->golongan_darah ?? 'N/A' }}</td>
+                            <td>{{ $darah->golongan_darah->golongan_darah }} {{ $darah->golongan_darah->rhesus }}</td>
                             <td>{{ $darah->jumlah ?? 'N/A' }}</td>
                             <td>{{ $darah->lembaga->nama ?? 'N/A' }}</td>
                             <td>
@@ -60,12 +60,16 @@ Kantong Darah
                             </td>
                         </tr>
                         @empty
-                            <tr>
-                                <td colspan="5" class="text-center">No data available.</td>
+                            <tr id="noDataMessage" class="d-none">
+                                <td colspan="5" class="text-center">Tidak ada data yang bisa ditampilkan.</td>
                             </tr>
                         @endforelse
                     </tbody>
                 </table>
+
+                <div id="errorMessage" class="alert alert-danger d-none" role="alert">
+                    Tidak ada data yang bisa ditampilkan.
+                </div>
             </div>
         </div>
     </div>
@@ -74,33 +78,47 @@ Kantong Darah
 
 @section('script')
 document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.querySelector('input[type="text"]');
+    const searchButton = document.getElementById('searchButton');
     const tableRows = document.querySelectorAll('tbody tr');
+    const noDataMessage = document.getElementById('noDataMessage');
+    const errorMessage = document.getElementById('errorMessage');
 
-    searchInput.addEventListener('input', function() {
-        const searchTerm = searchInput.value.toLowerCase();
-
-        tableRows.forEach(row => {
-            const rowData = row.textContent.toLowerCase();
-            if (rowData.includes(searchTerm)) {
-                row.style.display = '';
-            } else {
-                row.style.display = 'none';
-            }
-        });
-    });
-
-    document.querySelector('button').addEventListener('click', function() {
-        const searchTerm = searchInput.value.toLowerCase();
+    searchButton.addEventListener('click', function() {
+        const searchInput = document.querySelector('input[type="text"]');
+        const searchTerm = searchInput.value.trim().toLowerCase();
+        let dataFound = false;
 
         tableRows.forEach(row => {
-            const rowData = row.textContent.toLowerCase();
-            if (rowData.includes(searchTerm)) {
-                row.style.display = '';
+            const golonganDarahCell = row.querySelector('td:nth-child(2)').textContent.toLowerCase().trim();
+            const golonganDarah = golonganDarahCell.split(' ')[0]; // Ambil hanya golongan darah tanpa rhesus
+
+            if (searchTerm === '') {
+                row.style.display = ''; // Tampilkan jika pencarian kosong
+                dataFound = true;
+            } else if (searchTerm === 'a' && golonganDarah === 'a' && !golonganDarahCell.includes('ab')) {
+                row.style.display = ''; // Tampilkan golongan darah A
+                dataFound = true;
+            } else if (searchTerm === 'b' && golonganDarah === 'b' && !golonganDarahCell.includes('ab')) {
+                row.style.display = ''; // Tampilkan golongan darah B
+                dataFound = true;
+            } else if (searchTerm === 'ab' && golonganDarah === 'ab') {
+                row.style.display = ''; // Tampilkan golongan darah AB
+                dataFound = true;
+            } else if (searchTerm === 'o' && golonganDarah === 'o') {
+                row.style.display = ''; // Tampilkan golongan darah O
+                dataFound = true;
             } else {
-                row.style.display = 'none';
+                row.style.display = 'none'; // Sembunyikan jika tidak sesuai dengan filter
             }
         });
+
+        if (!dataFound) {
+            errorMessage.classList.remove('d-none'); // Tampilkan pesan error jika tidak ada data
+            noDataMessage.classList.remove('d-none'); // Tampilkan pesan "No data available"
+        } else {
+            errorMessage.classList.add('d-none'); // Sembunyikan pesan error jika ada data yang cocok
+            noDataMessage.classList.add('d-none'); // Sembunyikan pesan "No data available"
+        }
     });
 });
 @endsection
