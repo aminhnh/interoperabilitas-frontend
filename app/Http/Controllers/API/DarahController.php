@@ -13,7 +13,7 @@ class DarahController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function kantongdarah()
     {
         $query = request()->query();
         $listKantongDarah = KantongDarah::filterByQuery($query)->get();
@@ -27,7 +27,7 @@ class DarahController extends Controller
             ], 200);
         } else {
             // Return the HTML view for web requests
-            return view('kantongdarah.index', ['kantongdarah' => $listKantongDarah]);
+            return view('pages.kantongdarah', ['kantongdarah' => $listKantongDarah]);
         }
     }
 
