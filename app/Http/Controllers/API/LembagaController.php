@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Gate;
 
 class LembagaController extends Controller
 {
-    public function index()
+    public function lembaga()
     {
         $query = request()->query();
 
@@ -25,7 +25,7 @@ class LembagaController extends Controller
             ], 200);
         } else {
             // Return the HTML view for web requests
-            return view('lembaga.lembaga', ['lembagas' => $listLembaga]);
+            return view('pages.lembaga', ['lembagas' => $listLembaga]);
         }
 
 
