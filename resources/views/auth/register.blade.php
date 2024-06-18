@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Register</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Pastikan untuk memuat CSS yang sudah di-modifikasi -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
@@ -14,8 +13,8 @@
         <div class="container pt-5">
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center text-white">
-                    <h1>SELAMAT DATANG KEMBALI</h1>
-                    <p>Isi formulir di bawah masuk ke sistem.</p>
+                    <h1>DAFTAR AKUN BARU</h1>
+                    <p>Isi formulir di bawah untuk membuat akun baru.</p>
                 </div>
             </div>
         </div>
@@ -25,7 +24,7 @@
             <div class="col-md-6">
                 <div class="card border-0">
                     <div class="card-body">
-                        <form id="loginForm" method="POST">
+                        <form id="registerForm" method="POST">
                             @csrf
                             <div class="form-group">
                                 <label for="name">Nama Pengguna</label>
@@ -40,10 +39,10 @@
                                 <input placeholder="Password" id="password" type="password" class="form-control" name="password" required>
                             </div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-crimson btn-block">Masuk</button>
+                                <button type="submit" class="btn btn-crimson btn-block">Daftar</button>
                             </div>
                             <div class="form-group mt-5">
-                                <button type="button" onclick="window.location.href='/register';" class="btn btn-outline-blood-orange btn-block">Belum punya akun? Daftar</button>
+                                <button type="button" onclick="window.location.href='/login';" class="btn btn-outline-blood-orange btn-block">Sudah Punya Akun? Masuk</button>
                             </div>
                         </form>
                     </div>
@@ -53,11 +52,11 @@
     </div>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const loginForm = document.getElementById('loginForm');
-        loginForm.addEventListener('submit', function(event) {
+        const registerForm = document.getElementById('registerForm');
+        registerForm.addEventListener('submit', function(event) {
             event.preventDefault();
-            const formData = new FormData(loginForm);
-            fetch('http://127.0.0.1:8000/api/auth', {
+            const formData = new FormData(registerForm);
+            fetch('http://127.0.0.1:8000/api/register', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -67,11 +66,11 @@
             })
             .then(response => response.json())
             .then(data => {
-                if (data.status === '200 OK') {
-                    alert('Login successful');
-                    window.location.href = '/dashboard'; // Sesuaikan sesuai kebutuhan
+                if (data.status === '201 Created') {
+                    alert('Registration successful');
+                    window.location.href = '/login'; // Navigate to login after successful registration
                 } else {
-                    alert('Login failed: ' + data.message);
+                    alert('Registration failed: ' + data.message);
                 }
             })
             .catch(error => console.error('Error:', error));
