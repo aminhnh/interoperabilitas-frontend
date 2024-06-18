@@ -20,18 +20,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('login',function () {
+Route::get('login', function () {
     return view('auth.login');
-});
+})->name('login');
 
-Route::get('dashboard',function () {
+Route::get('register', function () {
+    return view('auth.register');
+})->name('register');
+
+Route::get('dashboard', function () {
     return view('layouts.dashboard');
-});
-Route::get('lembaga',function () {
-    return view('lembaga.lembaga');
-});
+})->name('dashboard');
 
 Route::get('/home', [ViewController::class, 'index']);
-Route::get('/kantongdarah', [DarahController::class, 'index']);
+Route::get('/kantongdarah', [DarahController::class, 'kantongdarah']);
 
-Route::get('/lembaga', [LembagaController::class, 'index']);
+Route::get('/lembaga', [LembagaController::class, 'lembaga']);
