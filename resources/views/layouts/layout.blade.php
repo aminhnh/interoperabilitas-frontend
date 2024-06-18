@@ -52,9 +52,6 @@
             <li><a class="text-white" href="/kantongdarah">Kantong Darah</a></li>
             <li><a class="text-white" href="/lembaga">Lembaga</a></li>
             <li><a class="text-white" href="/kecamatan">Wilayah</a></li>
-            <li><a class="text-white" href="/settings">Settings</a></li>
-            <li><a class="text-white" href="/profile">Profile</a></li>
-            <li><a class="text-white" href="/logout">Logout</a></li>
         </ul>
     </div>
     <div id="content" style="margin-left: 200px;">
