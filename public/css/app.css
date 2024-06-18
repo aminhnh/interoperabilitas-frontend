@@ -57,3 +57,70 @@
     border-bottom-left-radius: 32px;
     border-bottom-right-radius: 32px;
 }
+
+/* Button Base Style */
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    color: white; /* Default text color for all buttons */
+    border: none; /* Default no border for simplicity */
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Red Background Buttons */
+.btn-crimson {
+    background-color: #DC153C;
+    border-color: #C41334;
+}
+.btn-crimson:hover {
+    background-color: #C41334;
+    color: #FFF2F2;
+}
+
+.btn-blood-orange {
+    background-color: #DD4D4F;
+    border-color: #C24441;
+}
+.btn-blood-orange:hover {
+    background-color: #C24441;
+    color: #FFF2F2;
+}
+
+.btn-maroon {
+    background-color: #800000;
+    border-color: #690000;
+}
+.btn-maroon:hover {
+    background-color: #690000;
+    color: #FFF2F2;
+}
+
+.btn-dark-red {
+    background-color: #8B0000;
+    border-color: #750000;
+}
+.btn-dark-red:hover {
+    background-color: #750000;
+    color: #FFF2F2;
+}
+
+.btn-blood-red {
+    background-color: #660000;
+    border-color: #550000;
+}
+.btn-blood-red:hover {
+    background-color: #550000;
+    color: #FFF2F2;
+}
+.btn-outline-blood-orange {
+    color: #DD4D4F; /* Warna teks menggunakan warna blood-orange */
+    border: 2px solid #DD4D4F; /* Border warna blood-orange */
+    background-color: transparent; /* Latar belakang transparan */
+}
+
+.btn-outline-blood-orange:hover {
+    background-color: #DD4D4F; /* Warna latar berubah saat hover */
+    color: white; /* Warna teks menjadi putih saat hover */
+}
