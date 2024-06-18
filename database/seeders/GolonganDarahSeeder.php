@@ -8,19 +8,19 @@ class GolonganDarahSeeder extends Seeder
 {
     public function run()
     {
-        GolonganDarah::create([
-            'golongan_darah' => 'A',
-            'rhesus' => '+',
-        ]);
+        $data = [
+            ['golongan_darah' => 'A', 'rhesus' => '+'],
+            ['golongan_darah' => 'A', 'rhesus' => '-'],
+            ['golongan_darah' => 'B', 'rhesus' => '+'],
+            ['golongan_darah' => 'B', 'rhesus' => '-'],
+            ['golongan_darah' => 'AB', 'rhesus' => '+'],
+            ['golongan_darah' => 'AB', 'rhesus' => '-'],
+            ['golongan_darah' => 'O', 'rhesus' => '+'],
+            ['golongan_darah' => 'O', 'rhesus' => '-'],
+        ];
 
-        GolonganDarah::create([
-            'golongan_darah' => 'B',
-            'rhesus' => '-',
-        ]);
-
-        GolonganDarah::create([
-            'golongan_darah' => 'B',
-            'rhesus' => '+',
-        ]);
+        foreach ($data as $item) {
+            GolonganDarah::create($item);
+        }
     }
 }
