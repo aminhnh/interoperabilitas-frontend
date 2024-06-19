@@ -96,6 +96,7 @@
 
 <!-- Bagian JavaScript untuk logout -->
 <script>
+    @yield('script')
     document.addEventListener('DOMContentLoaded', function () {
         const logoutLink = document.getElementById('logoutLink');
         const logoutOverlay = document.getElementById('logoutOverlay');
