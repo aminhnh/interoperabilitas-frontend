@@ -31,6 +31,9 @@ Route::get('register', function () {
 Route::get('dashboard', function () {
     return view('layouts.dashboard');
 })->name('dashboard');
+Route::get('wilayah', function () {
+    return view('pages.wilayah');
+})->name('wilayah');
 
 Route::get('/home', [ViewController::class, 'index']);
 Route::get('/kantongdarah', [DarahController::class, 'kantongdarah']);
