@@ -10,6 +10,13 @@ Lembaga
 
 @section('content')
 <div class="container" style="padding-top: 5rem;">  
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Lembaga</li>
+        </ol>
+    </nav>
+
     <div class="container">
         <div class="row">
             <div class="col-9 card d-flex flex-row p-3">

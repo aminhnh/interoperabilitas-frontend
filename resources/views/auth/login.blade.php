@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- Pastikan untuk memuat CSS yang sudah di-modifikasi -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
@@ -69,7 +68,8 @@
             .then(data => {
                 if (data.status === '200 OK') {
                     alert('Login successful');
-                    window.location.href = '/dashboard'; // Sesuaikan sesuai kebutuhan
+                    localStorage.setItem('authToken', data.token); // Store the token
+                    window.location.href = '/dashboard';
                 } else {
                     alert('Login failed: ' + data.message);
                 }

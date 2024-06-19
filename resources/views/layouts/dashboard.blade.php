@@ -6,6 +6,11 @@ Dashboard
 
 @section('content')
     <div class="container text-center" style="padding-top: 5rem;">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+            </ol>
+        </nav>
         <h2 class="">Selamat datang, User!</h2>
         <div class="">Apa yang ingin Anda lakukan hari ini?</div>
 
