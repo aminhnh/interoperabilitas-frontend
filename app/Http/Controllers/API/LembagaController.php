@@ -8,7 +8,6 @@ use App\Http\Requests\LembagaUpdateRequest;
 use App\Http\Resources\LembagaResource;
 use App\Models\Lembaga;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
 
 class LembagaController extends Controller
 {
@@ -20,15 +19,13 @@ class LembagaController extends Controller
         if (request()->wantsJson()) {
             return response()->json([
                 'status' => '200 OK',
-                'message' => 'Berhasil mengambil data darah.',
+                'message' => 'Berhasil mengambil data lembaga.',
                 'data' => LembagaResource::collection($listLembaga),
             ], 200);
         } else {
             // Return the HTML view for web requests
-            return view('pages.lembaga', ['lembagas' => $listLembaga]);
+            return view('lembaga.lembaga', ['lembagas' => $listLembaga]);
         }
-
-
     }
 
     public function store(LembagaStoreRequest $request)
@@ -44,21 +41,19 @@ class LembagaController extends Controller
         ], 201);
     }
 
-    public function show(string $id)
+    public function show($id)
     {
-        $lembaga = Lembaga::find($id);
-        if (is_null($lembaga)) {
+        $lembaga = Lembaga::with('role', 'kelurahan.kecamatan.kota.provinsi')->find($id);
+
+        if (!$lembaga) {
             return response()->json([
                 'status' => '404 Not Found',
                 'message' => 'Data lembaga tidak ditemukan.',
             ], 404);
         }
 
-        return response()->json([
-            'status' => '200 OK',
-            'message' => 'Berhasil menampilkan data lembaga.',
-            'data' => new LembagaResource($lembaga->load('role', 'kelurahan.kecamatan.kota.provinsi')),
-        ], 200);
+        // Return view for web requests
+        return view('lembaga.show', compact('lembaga'));
     }
 
     public function update(LembagaUpdateRequest $request, Lembaga $lembaga)
@@ -76,7 +71,7 @@ class LembagaController extends Controller
         ]);
 
         return response()->json([
-            'status' => '201 Created',
+            'status' => '200 OK',
             'message' => 'Berhasil memperbarui data lembaga.',
             'data' => new LembagaResource($lembaga->load('role', 'kelurahan.kecamatan.kota.provinsi')),
         ], 200);
@@ -92,3 +87,4 @@ class LembagaController extends Controller
         ], 200);
     }
 }
+

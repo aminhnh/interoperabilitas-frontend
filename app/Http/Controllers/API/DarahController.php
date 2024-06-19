@@ -27,7 +27,7 @@ class DarahController extends Controller
             ], 200);
         } else {
             // Return the HTML view for web requests
-            return view('pages.kantongdarah', ['kantongdarah' => $listKantongDarah]);
+            return view('kantongdarah.kantongdarah', ['kantongdarah' => $listKantongDarah]);
         }
     }
 

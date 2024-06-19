@@ -9,11 +9,6 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
 */
 
 Route::get('/', function () {
@@ -31,11 +26,15 @@ Route::get('register', function () {
 Route::get('dashboard', function () {
     return view('layouts.dashboard');
 })->name('dashboard');
+
 Route::get('wilayah', function () {
-    return view('pages.wilayah');
+    return view('wilayah.wilayah');
 })->name('wilayah');
 
-Route::get('/home', [ViewController::class, 'index']);
-Route::get('/kantongdarah', [DarahController::class, 'kantongdarah']);
+Route::get('/home', [ViewController::class, 'index'])->name('home');
 
-Route::get('/lembaga', [LembagaController::class, 'lembaga']);
+Route::get('/kantongdarah', [DarahController::class, 'kantongdarah'])->name('kantongdarah');
+
+Route::get('/lembaga', [LembagaController::class, 'lembaga'])->name('lembaga');
+
+Route::get('/lembaga/{id}', [LembagaController::class, 'show'])->name('lembaga.show');
