@@ -60,6 +60,7 @@ Lembaga
                             <th scope="col">Alamat</th>
                             <th scope="col">Kode Pos</th>
                             <th scope="col">No Telp</th>
+                            <th scope="col">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -67,14 +68,17 @@ Lembaga
                         <tr>
                             <th scope="row">{{ $loop->iteration }}</th>
                             <td>{{ $lembaga->nama }}</td>
-                            <td>{{str_replace('_', ' ', Str::ucfirst($lembaga->jenis))}}</td>
+                            <td>{{ str_replace('_', ' ', Str::ucfirst($lembaga->jenis)) }}</td>
                             <td>{{ $lembaga->alamat }}</td>
                             <td>{{ $lembaga->kode_pos }}</td>
                             <td>{{ $lembaga->no_telepon }}</td>
+                            <td>
+                                <a href="{{ route('lembaga.show', $lembaga->id) }}" class="btn btn-info">Detail</a>
+                            </td>
                         </tr>
                         @empty
                             <tr id="noDataMessage" class="d-none">
-                                <td colspan="6" class="text-center">Tidak ada data yang bisa ditampilkan.</td>
+                                <td colspan="7" class="text-center">Tidak ada data yang bisa ditampilkan.</td>
                             </tr>
                         @endforelse
                     </tbody>
